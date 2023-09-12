@@ -20,44 +20,50 @@ slab_z=0.5;
 
 
 translate([-332616, -4634209, 0]) color("#486f38", .5) plot();
+//center_slab();
 
-R=2.5;
+R=3.895;
 h=1;
 for(i=[0:2])
-    rotate((i * 120)) translate([0, R*sqrt(3), 0]) color("#cccccc", 1) wing_slab();
+    rotate((i * 120)) translate([0, R*sqrt(3.32), 0]) color("#cccccc", 1) wing_slab();
 
-/*
-east_wing_slab();
-translate([-4.5, -4.5, 0]) south_wing_slab();
-west_wing_slab();
-*/
 module plot() {
     polygon(points=plot_boundary);
 }
 
-/*
-module east_wing_slab() {
-    rotate(-60) color("#cccccc", 1) wing_slab();
-}
-module south_wing_slab() {
-    rotate(-180) color("#cccccc", 1) wing_slab();
-}
-module west_wing_slab() {
-    rotate(-300) color("#cccccc", 1) wing_slab();
-}
-*/
 
-
-module wing_slab(rotation=0) {
+module center_slab() {
+    h=pow((pow(wing_x, 2) - (pow(wing_x, 2) / 4)), (1 / 2));
     slab_points=[
-        [0, 0, 0 ], // 0
-        [wing_x/2, 0, 0 ], // 1
-        [wing_x/2, wing_y/2, 0 ], // 2
-        [0, wing_y/2, 0 ], // 3
+        [0, 0, 0], // 0
+        [wing_x, 0, 0], // 1
+        [(wing_x / 2), h, 0], // 2
+
+        [0, 0, slab_z], // 3
+        [wing_x, 0, 0slab_z], // 4
+        [(wing_x / 2), h, slab_z], // 5
+    ];
+    slab_faces=[
+        [0,1,2], // bottom
+        [3,4,1,0], // front
+        [5,4,3], // top
+        [4,5,2,1], // right
+        [2,5,0,3], // left
+    ];
+    translate([(0 - (wing_x/2)), (0 - (h/2)), 0])
+        polyhedron(slab_points, slab_faces);
+}
+
+module wing_slab() {
+    slab_points=[
+        [0, 0, 0], // 0
+        [wing_x, 0, 0], // 1
+        [wing_x, wing_y, 0], // 2
+        [0, wing_y, 0], // 3
         [0, 0, slab_z], // 4
-        [wing_x/2, 0, slab_z], // 5
-        [wing_x/2, wing_y/2, slab_z], // 6
-        [0, wing_y/2, slab_z], // 7
+        [wing_x, 0, slab_z], // 5
+        [wing_x, wing_y, slab_z], // 6
+        [0, wing_y, slab_z], // 7
     ];
     slab_faces=[
         [0,1,2,3], // bottom
@@ -67,5 +73,6 @@ module wing_slab(rotation=0) {
         [6,7,3,2], // back
         [7,4,0,3], // left
     ];
-    rotate(rotation) polyhedron(slab_points, slab_faces);
+    translate([(0 - (wing_x/2)), (0 - (wing_y/2)), 0])
+        polyhedron(slab_points, slab_faces);
 }
