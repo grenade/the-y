@@ -16,4 +16,3 @@ module plot() {
     ];
     translate([-332616, -4634209, 0]) color("#486f38", 0.4) polygon(points=plot_boundary);
 }
-
