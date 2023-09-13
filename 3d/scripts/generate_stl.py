@@ -40,7 +40,7 @@ if __name__ == '__main__':
     }
 
     exporter = ColoredStlExporter(
-        os.path.join(source_parts_dir, 'the-y.scad'),
+        os.path.join(source_parts_dir, '../the-y.scad'),
         os.path.join(source_parts_dir, 'build'),
         openscad_variables)
     exporter.run()
