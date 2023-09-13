@@ -1,6 +1,11 @@
 use <plot.scad>
 use <tree.scad>
 
+render_plot = false;
+render_trees = false;
+render_revision = "";
+render_date = "YYYY-MM-DD";
+
 // units are in millimetres
 wing_x = 9000;
 wing_y = 9000;
@@ -13,46 +18,50 @@ center_d = 5200;
 rotate_y = 7100;
 rotate_d = 120;
 
-translate([-4000, 18000, 0]) scale([50, 60, 40]) tree(
-    h_increment     = 10,
-    r_decrement     = 0.7,
-    md_init         = 20,
-    main_depth      = 20,
-    rnd_seed        = 42,
-    scaling         = 0.97,
-    s_variance      = 0.1,
-    bd_init         = 3,
-    branch_depth    = 4,
-    branch_angle    = 60,
-    branch_min_size = 0.3,
-    branch_max_size = 0.8
-)
-{
-    circle(d = 10, $fn = 8);
-    square([2, 2]);
+if (render_trees) {
+    translate([-4000, 18000, 0]) scale([50, 60, 40]) tree(
+        h_increment     = 10,
+        r_decrement     = 0.7,
+        md_init         = 20,
+        main_depth      = 20,
+        rnd_seed        = 42,
+        scaling         = 0.97,
+        s_variance      = 0.1,
+        bd_init         = 3,
+        branch_depth    = 4,
+        branch_angle    = 60,
+        branch_min_size = 0.3,
+        branch_max_size = 0.8
+    )
+    {
+        circle(d = 10, $fn = 8);
+        square([2, 2]);
+    }
+
+    translate([-11000, 10000, 0]) rotate(70) scale([50, 50, 50]) tree(
+        h_increment     = 10,
+        r_decrement     = 0.7,
+        md_init         = 20,
+        main_depth      = 20,
+        rnd_seed        = 42,
+        scaling         = 0.97,
+        s_variance      = 0.1,
+        bd_init         = 3,
+        branch_depth    = 4,
+        branch_angle    = 60,
+        branch_min_size = 0.3,
+        branch_max_size = 0.8
+    )
+    {
+        circle(d = 10, $fn = 8);
+        square([2, 2]);
+    }
 }
 
-translate([-11000, 10000, 0]) rotate(70) scale([50, 50, 50]) tree(
-    h_increment     = 10,
-    r_decrement     = 0.7,
-    md_init         = 20,
-    main_depth      = 20,
-    rnd_seed        = 42,
-    scaling         = 0.97,
-    s_variance      = 0.1,
-    bd_init         = 3,
-    branch_depth    = 4,
-    branch_angle    = 60,
-    branch_min_size = 0.3,
-    branch_max_size = 0.8
-)
-{
-    circle(d = 10, $fn = 8);
-    square([2, 2]);
+
+if (render_plot) {
+    scale([1000, 1000, 1]) plot();
 }
-
-
-scale([1000, 1000, 1]) plot();
 
 
 for(i=[0:2])

@@ -1,0 +1,34 @@
+name: render 3d designs
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  render-3d:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: set up output directory
+        run: mkdir -p 3d/build/output
+
+      - name: install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y openscad
+
+      - name: generate stl
+        run: |
+          python -u 3d/scripts/generate_stl.py
+          cp -r 3d/build/colored_stl 3d/build/output/3d_colored_stl
+
+      - name: archive artifacts
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: 3d
+          path: |
+            3d/build
