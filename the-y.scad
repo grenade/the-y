@@ -54,6 +54,7 @@ translate([-11000, 10000, 0]) rotate(70) scale([50, 50, 50]) tree(
 
 scale([1000, 1000, 1]) plot();
 
+
 for(i=[0:2])
     translate([0, 0, (i * wing_z)]) floor();
 translate([0, 0, (3 * wing_z)]) roof("#666666");
@@ -65,6 +66,7 @@ module floor() {
         rotate((i * rotate_d)) translate([0, rotate_y, 0]) wing();
     }
 }
+
 
 module roof(color) {
     for(i=[0:2]) {
@@ -84,7 +86,6 @@ module wing() {
 }
 
 module wing_roof(color) {
-    
     roof_x = wing_x + (roof_o * 2);
     roof_y = wing_y + roof_o;
     points = [
@@ -96,9 +97,9 @@ module wing_roof(color) {
 
         // roof corners
         [(roof_x / 2), (0 - (center_d / 2)), roof_z],
-        [(roof_x / 2), roof_y, roof_z]      
+        [(roof_x / 2), roof_y, roof_z],
     ];
-    faces = [ 
+    faces = [
         [0, 1, 2, 3],   // base
         [3, 4, 0],      // left triangle
         [1, 5, 2],      // right triangle
@@ -131,7 +132,7 @@ module wing_window() {
         [7,4,0,3], // left
     ];
     translate([(0 - (wing_x / 2)), (0 - (wing_y / 2)), slab_z])
-        color("#95c8d8", 0.4) 
+        color("#95c8d8", 0.4)
         polyhedron(window_points, window_faces);
 }
 
