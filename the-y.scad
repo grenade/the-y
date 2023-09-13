@@ -116,7 +116,7 @@ module wing_roof() {
         [5, 4, 3, 2]    // back side
     ];
     translate([(0 - (roof_x / 2)), (0 - (wing_y / 2)), 0])
-        color([(102 / 255), (102 / 255), (102 / 255)])
+        color([(102 / 255), (102 / 255), (102 / 255)], 1)
         polyhedron(points, faces, convexity = 10);
 }
 
@@ -141,7 +141,7 @@ module wing_window() {
         [7,4,0,3], // left
     ];
     translate([(0 - (wing_x / 2)), (0 - (wing_y / 2)), slab_z])
-        color([(149 / 255), (200 / 255), (216 / 255)], 0.4)
+        color([(149 / 255), (200 / 255), (216 / 255)], 1)
         polyhedron(window_points, window_faces);
 }
 
