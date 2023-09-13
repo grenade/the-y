@@ -66,7 +66,7 @@ if (render_plot) {
 
 for(i=[0:2])
     translate([0, 0, (i * wing_z)]) floor();
-translate([0, 0, (3 * wing_z)]) roof("#666666");
+translate([0, 0, (3 * wing_z)]) roof();
 
 
 module floor() {
@@ -77,14 +77,14 @@ module floor() {
 }
 
 
-module roof(color) {
+module roof() {
     for(i=[0:2]) {
-        rotate((i * rotate_d)) translate([0, rotate_y, 0]) wing_roof(color);
+        rotate((i * rotate_d)) translate([0, rotate_y, 0]) wing_roof();
     }
 }
 
 module center_slab() {
-    rotate(30) color("#cccccc", 1) cylinder(slab_z, center_d, center_d, $fn=3);
+    rotate(30) color([(204 / 255), (204 / 255), (204 / 255)], 1) cylinder(slab_z, center_d, center_d, $fn=3);
 }
 
 module wing() {
@@ -94,7 +94,7 @@ module wing() {
     }
 }
 
-module wing_roof(color) {
+module wing_roof() {
     roof_x = wing_x + (roof_o * 2);
     roof_y = wing_y + roof_o;
     points = [
@@ -116,7 +116,7 @@ module wing_roof(color) {
         [5, 4, 3, 2]    // back side
     ];
     translate([(0 - (roof_x / 2)), (0 - (wing_y / 2)), 0])
-        color(color)
+        color([(102 / 255), (102 / 255), (102 / 255)])
         polyhedron(points, faces, convexity = 10);
 }
 
@@ -141,7 +141,7 @@ module wing_window() {
         [7,4,0,3], // left
     ];
     translate([(0 - (wing_x / 2)), (0 - (wing_y / 2)), slab_z])
-        color("#95c8d8", 0.4)
+        color([(149 / 255), (200 / 255), (216 / 255)], 0.4)
         polyhedron(window_points, window_faces);
 }
 
@@ -165,6 +165,6 @@ module wing_slab() {
         [7,4,0,3], // left
     ];
     translate([(0 - (wing_x/2)), (0 - (wing_y/2)), 0])
-        color("#cccccc", 1)
+        color([(204 / 255), (204 / 255), (204 / 255)], 1)
         polyhedron(slab_points, slab_faces);
 }
