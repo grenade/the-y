@@ -1,4 +1,4 @@
-module plot() {
+module plot(r = 72, g = 111, b = 56, o = 0.4) {
     plot_boundary=[
         [332600.56300000, 4634190.49600000], // south
         [332600.56300000, 4634190.49600000], // south
@@ -14,5 +14,5 @@ module plot() {
         [332617.36000000, 4634194.95800000], // east
         [332611.44000000, 4634193.23700000], // south-east
     ];
-    translate([-332616, -4634209, 0]) color("#486f38", 0.4) polygon(points=plot_boundary);
+    translate([-332616, -4634209, 0]) color([(r / 255), (g / 255), (b / 255)], o) polygon(points=plot_boundary);
 }

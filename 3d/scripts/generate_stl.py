@@ -33,10 +33,18 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
 
     openscad_variables = {
-        'render_plot': False,
-        'render_trees': False,
+        'render_plot': True,
+        'render_trees': True,
         'render_revision': rev_info.git_short_rev(),
         'render_date': rev_info.current_date(),
+        'plot_r': 72,
+        'plot_g': 111,
+        'plot_b': 56,
+        'plot_opacity': 1,
+        'window_r': 0,
+        'window_g': 0,
+        'window_b': 139,
+        'window_opacity': 1,
     }
 
     exporter = ColoredStlExporter(

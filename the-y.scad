@@ -1,10 +1,18 @@
 use <plot.scad>
 use <tree.scad>
 
-render_plot = false;
-render_trees = false;
+render_plot = true;
+render_trees = true;
 render_revision = "";
 render_date = "YYYY-MM-DD";
+window_r = 149;
+window_g = 200;
+window_b = 216;
+window_opacity = 0.4;
+plot_r = 72;
+plot_g = 111;
+plot_b = 56;
+plot_opacity = 0.4;
 
 // units are in millimetres
 wing_x = 9000;
@@ -13,9 +21,11 @@ wing_z = 3000;
 slab_z = 300;
 roof_z = 1000;
 roof_o = 500;
-window_y = 100;
 center_d = 5200;
 rotate_y = 7100;
+window_y = 100;
+
+// units are in degrees
 rotate_d = 120;
 
 if (render_trees) {
@@ -60,7 +70,7 @@ if (render_trees) {
 
 
 if (render_plot) {
-    scale([1000, 1000, 1]) plot();
+    scale([1000, 1000, 1]) plot(plot_r, plot_g, plot_b, plot_opacity);
 }
 
 
@@ -106,7 +116,7 @@ module wing_roof() {
 
         // roof corners
         [(roof_x / 2), (0 - (center_d / 2)), roof_z],
-        [(roof_x / 2), roof_y, roof_z],
+        [(roof_x / 2), (roof_y + (center_d / 2)), roof_z],
     ];
     faces = [
         [0, 1, 2, 3],   // base
@@ -141,7 +151,7 @@ module wing_window() {
         [7,4,0,3], // left
     ];
     translate([(0 - (wing_x / 2)), (0 - (wing_y / 2)), slab_z])
-        color([(149 / 255), (200 / 255), (216 / 255)], 1)
+        color([(window_r / 255), (window_g / 255), (window_b / 255)], window_opacity)
         polyhedron(window_points, window_faces);
 }
 
