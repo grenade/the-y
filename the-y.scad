@@ -33,7 +33,7 @@ module plot(r = 72, g = 111, b = 56, o = 0.4) {
         [332611.44000000, 4634193.23700000], // south-east
     ];
     difference() {
-        color([(r / 255), (g / 255), (b / 255)], o)
+        color([(r / 255), (g / 255), (b / 255)])
             translate([0, 0, -1200])
             rotate([0, 4, 0])
             linear_extrude(height = 500, center = true, convexity = 10, twist = 0)
@@ -89,48 +89,48 @@ module curved_truss(
     // right top_chord
     translate([top_chord_x, 0, top_chord_y])
         rotate([90, -40, 0])
-        color([133/255, 94/255, 66/255], 1)
+        color([133/255, 94/255, 66/255])
         curve_beam(width = top_chord_width, depth = top_chord_height, length = top_chord_length, delta = top_chord_delta);
 
     // left top_chord
     translate([-top_chord_x, 0, top_chord_y])
         rotate([90, 220, 0])
-        color([133/255, 94/255, 66/255], 1)
+        color([133/255, 94/255, 66/255])
         curve_beam(width = top_chord_width, depth = top_chord_height, length = top_chord_length, delta = top_chord_delta);
 
     // bottom_chord
     translate([0, 25, bottom_chord_z])
         rotate([0, -90, 90])
-        color([133/255, 94/255, 66/255], 1)
+        color([133/255, 94/255, 66/255])
         curve_beam(width = bottom_chord_width, depth = bottom_chord_height, length = bottom_chord_length, delta = bottom_chord_delta);
 
     // right web
     translate([1000, 75, web_z])
         rotate([0, 30, 0])
-        color([133/255, 94/255, 66/255], 1)
+        color([133/255, 94/255, 66/255])
         cube([150, 100, web_length], center = true);
 
     // left web
     translate([-1000, 75, web_z])
         rotate([0, -30, 0])
-        color([133/255, 94/255, 66/255], 1)
+        color([133/255, 94/255, 66/255])
         cube([web_height, web_width, web_length], center = true);
 }
 
 module center_slab(diameter = center_d, sides = 3) {
     rotate(30)
-        color(color_concrete, 1)
+        color(color_concrete)
         cylinder(slab_z, diameter, diameter, $fn = sides);
 }
 
 module square_roof_skin(width = 16000, depth = 10, length = 7500, delta = 1100, t_x = 2400, t_y = 7000, t_z = 2800) {
     translate([t_x, -t_y, t_z])
         rotate([90, -40, 0])
-        color([1, 1, 1], 1)
+        color([1, 1, 1])
         curve_beam(width = width, depth = depth, length = length, delta = delta);
     translate([-t_x, -t_y, t_z])
         rotate([90, 220, 0])
-        color([1, 1, 1], 1)
+        color([1, 1, 1])
         curve_beam(width = width, depth = depth, length = length, delta = delta);
 }
 
@@ -150,7 +150,7 @@ module wing_roof(brace_length = 2600) {
     // braces
     for(i=[0:4]) {
         translate([0, (5975 - (i * 2950)), 5125])
-            color([133/255, 94/255, 66/255], 1)
+            color([133/255, 94/255, 66/255])
             cube([150, brace_length, 250], center = true);
     }
 
@@ -173,7 +173,7 @@ module wing_roof(brace_length = 2600) {
 
 module wing_slab(width = 9000, height = slab_z, depth = 9000, render_stairwell = false) {
     difference() {
-        color(color_concrete, 1)
+        color(color_concrete)
             cube([width, depth, height], center = true);
         if (render_stairwell) {
             translate([-4501, -4500, -height])
@@ -183,14 +183,14 @@ module wing_slab(width = 9000, height = slab_z, depth = 9000, render_stairwell =
 }
 
 module step(x = 1150, y = 300, z = 170) {
-    color([(204 / 255), (204 / 255), (204 / 255)], 1)
+    color([(204 / 255), (204 / 255), (204 / 255)])
         cube([x, y, z]);
 }
 
 module steps(count = 10, step_x = 1150, step_y = 300, step_z = 170) {
     //lower landing
     /*
-    color([(204 / 255), (204 / 255), (204 / 255)], 1)
+    color([(204 / 255), (204 / 255), (204 / 255)])
         cube([step_x, step_x, step_z]);
     */
 
@@ -203,7 +203,7 @@ module steps(count = 10, step_x = 1150, step_y = 300, step_z = 170) {
     // upper landing
     /*
     translate([0, step_y-(step_x + ((count) * step_y)), ((count) * step_z)])
-        color([(204 / 255), (204 / 255), (204 / 255)], 1)
+        color([(204 / 255), (204 / 255), (204 / 255)])
         cube([step_x, step_x, step_z]);
     */
 
@@ -212,19 +212,19 @@ module steps(count = 10, step_x = 1150, step_y = 300, step_z = 170) {
     slab_angle = 360 - atan(step_z / step_y);
     translate([0, -((count) * step_y), ((count) * step_z)])
         rotate([slab_angle, 0, 0])
-        color([(204 / 255), (204 / 255), (204 / 255)], 1)
+        color([(204 / 255), (204 / 255), (204 / 255)])
         cube([step_x, slab_y, (step_z * 0.9)]);
 }
 
 
 module wall_slab(width = 1000, height = 3000, depth = 300) {
-    color(color_concrete, 1)
+    color(color_concrete)
         cube([width, depth, height], center = true);
 }
 
 
 module window(width = 1000, height = 3000, depth = 20) {
-    color([216/255, 228/255, 233/255], 0.5)
+    color([216/255, 228/255, 233/255])
         cube([width, depth, height], center = true);
 }
 
@@ -237,11 +237,11 @@ module stairwell() {
     // upper landing
     translate([5650, -6160, 2280])
         rotate([0, 0, 90])
-        color([(204 / 255), (204 / 255), (204 / 255)], 1)
+        color([(204 / 255), (204 / 255), (204 / 255)])
         cylinder(170, 680, 680, $fn=3);
     translate([6220, -5800, 2280])
         rotate([0, 0, 30])
-        color([(204 / 255), (204 / 255), (204 / 255)], 1)
+        color([(204 / 255), (204 / 255), (204 / 255)])
         cylinder(170, 680, 680, $fn=3);
 
     translate([5650, -4000, 1430])
@@ -251,7 +251,7 @@ module stairwell() {
     // middle landing
     translate([6330, -3450, 1430])
         rotate([0, 0, 90])
-        color([(204 / 255), (204 / 255), (204 / 255)], 1)
+        color([(204 / 255), (204 / 255), (204 / 255)])
         cylinder(170, 550, 550, $fn=3);
 
     translate([-5650, -5200, 580])
@@ -261,11 +261,11 @@ module stairwell() {
     // lower landing
     translate([3640, -2660, 580])
         rotate([0, 0, 90])
-        color([(204 / 255), (204 / 255), (204 / 255)], 1)
+        color([(204 / 255), (204 / 255), (204 / 255)])
         cylinder(170, 680, 680, $fn=3);
     translate([4220, -2350, 580])
         rotate([0, 0, 30])
-        color([(204 / 255), (204 / 255), (204 / 255)], 1)
+        color([(204 / 255), (204 / 255), (204 / 255)])
         cylinder(170, 680, 680, $fn=3);
 
     translate([4200, -4500, -270])
