@@ -12,8 +12,6 @@ rotate_y = 7100;
 
 rotate_d = 120;
 
-color_concrete = [128/255, 128/255, 118/255];
-
 $fn = 360;
 
 module plot(r = 72, g = 111, b = 56, o = 0.4) {
@@ -119,7 +117,7 @@ module curved_truss(
 
 module center_slab(diameter = center_d, sides = 3) {
     rotate(30)
-        color(color_concrete)
+        color([128/255, 128/255, 118/255])
         cylinder(slab_z, diameter, diameter, $fn = sides);
 }
 
@@ -173,7 +171,7 @@ module wing_roof(brace_length = 2600) {
 
 module wing_slab(width = 9000, height = slab_z, depth = 9000, render_stairwell = false) {
     difference() {
-        color(color_concrete)
+        color([128/255, 128/255, 118/255])
             cube([width, depth, height], center = true);
         if (render_stairwell) {
             translate([-4501, -4500, -height])
@@ -218,7 +216,7 @@ module steps(count = 10, step_x = 1150, step_y = 300, step_z = 170) {
 
 
 module wall_slab(width = 1000, height = 3000, depth = 300) {
-    color(color_concrete)
+    color([128/255, 128/255, 118/255])
         cube([width, depth, height], center = true);
 }
 
