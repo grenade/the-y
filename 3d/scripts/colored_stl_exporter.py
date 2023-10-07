@@ -129,19 +129,20 @@ module color_extractor(c) {
         def replace_with_color_selector(contents):
             contents = COLOR_REGEX.sub(' color_selector(', contents)
             return contents + '''
-        module color_selector(c) {{
-            precision = 0.0000001;  // arbitrary
-            function compare_floats(x, y, i=0) = 
-                  (len(x) != len(y)) ? false  // if arrays differ in length, they can't be equal
-                : (i >= len(x)) ? true  // if we've hit the end of the arrays without issue, we're equal
-                : (x[i] - precision <= y[i]) && x[i] + precision >= y[i]
-                    ? compare_floats(x, y, i+1)
-                    : false;  // not equal, short circuit
+module color_selector(c) {{
+    precision = 0.001;  // arbitrary
+    function compare_floats(x, y, i=0) = 
+          (len(x) != len(y)) ? false  // if arrays differ in length, they can't be equal
+        : (i >= len(x)) ? true  // if we've hit the end of the arrays without issue, we're equal
+        : (x[i] - precision <= y[i]) && x[i] + precision >= y[i]
+            ? compare_floats(x, y, i+1)
+            : false;  // not equal, short circuit
 
-            if (c == {0} || compare_floats(c, {0}))
-                children();
-        }}
-                    '''.format(color)
+    if (c == {0} || compare_floats(c, {0}))
+        children();
+}}
+'''
+        .format(color)
 
         color_hash = hashlib.sha256(color.encode('utf-8')).hexdigest()
 
