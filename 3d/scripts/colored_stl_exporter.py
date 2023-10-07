@@ -141,8 +141,7 @@ module color_selector(c) {{
     if (c == {0} || compare_floats(c, {0}))
         children();
 }}
-'''
-        .format(color)
+'''.format(color)
 
         color_hash = hashlib.sha256(color.encode('utf-8')).hexdigest()
 
