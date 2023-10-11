@@ -115,9 +115,9 @@ module curved_truss(
         cube([web_height, web_width, web_length], center = true);
 }
 
-module center_slab(diameter = center_d, sides = 3) {
+module cylinder_slab(diameter = center_d, sides = 3) {
     rotate(30)
-        color([128/255, 128/255, 118/255])
+        color([169/255, 169/255, 169/255])
         cylinder(slab_z, diameter, diameter, $fn = sides);
 }
 
@@ -171,7 +171,7 @@ module wing_roof(brace_length = 2600) {
 
 module wing_slab(width = 9000, height = slab_z, depth = 9000, render_stairwell = false) {
     difference() {
-        color([128/255, 128/255, 118/255])
+        color([169/255, 169/255, 169/255])
             cube([width, depth, height], center = true);
         if (render_stairwell) {
             translate([-4501, -4500, -height])
@@ -471,7 +471,7 @@ for(i=[0:2]) {
     // stairwells
     rotate(((i * rotate_d) - 60))
         translate([0, rotate_y * 0.75, -3600])
-        center_slab(diameter = 2800, sides = 360);
+        cylinder_slab(diameter = 2800, sides = 360);
     
     if (render_roof) {
         rotate(((i * rotate_d) - 60))
@@ -482,10 +482,10 @@ for(i=[0:2]) {
 }
 
 translate([0, 0, 3000])
-    center_slab();
+    cylinder_slab();
 
 translate([0, 0, -300])
-    center_slab();
+    cylinder_slab();
 
 translate([0, 0, -3600])
-    center_slab();
+    cylinder_slab();
