@@ -132,14 +132,18 @@ module square_roof_skin(width = 16000, depth = 10, length = 7500, delta = 1100, 
         curve_beam(width = width, depth = depth, length = length, delta = delta);
 }
 
-module roof_skin(width = 16000, depth = 10, length = 7500, delta = 1100, t_x = 2400, t_y = 7000, t_z = 2800, difference_sphere = 7000, s_x = 0, s_y = 10000, s_z = 1000) {
+module roof_skin(width = 16000, depth = 10, length = 7500, delta = 1100, t_x = 2400, t_y = 7000, t_z = 2800, d_s_f = 7000, d_s_f_x = 0, d_s_f_y = 10000, d_s_f_z = 1000, d_s_f_d = false, d_s_r = 7000, d_s_r_x = 0, d_s_r_y = 10000, d_s_r_z = 1000, d_s_r_d = false) {
     difference() {
         square_roof_skin(width = width, depth = depth, length = length, delta = delta, t_x = t_x, t_y = t_y, t_z = t_z);
-        translate([s_x, s_y, -s_z]) sphere(difference_sphere);
-        translate([s_x, -s_y, -s_z]) sphere(difference_sphere);
+        translate([d_s_f_x, d_s_f_y, -d_s_f_z]) sphere(d_s_f);
+        translate([d_s_r_x, -d_s_r_y, -d_s_r_z]) sphere(d_s_r);
     }
-        //translate([s_x, s_y, -s_z]) sphere(difference_sphere);
-        //translate([0, -s_y, -s_z]) sphere(difference_sphere);
+    if (d_s_f_d) {
+        translate([d_s_f_x, d_s_f_y, -d_s_f_z]) sphere(d_s_f);
+    }
+    if (d_s_r_d) {
+        translate([d_s_r_x, -d_s_r_y, -d_s_r_z]) sphere(d_s_r);
+    }
 }
 
 
@@ -476,8 +480,7 @@ for(i=[0:2]) {
     if (render_roof) {
         rotate(((i * rotate_d) - 60))
             translate([0, rotate_y * 0.65, 3600])
-        // width = 16000, depth = 10, length = 7500, delta = 1100, t_x = 2400, t_y = 7000, t_z = 2800, difference_sphere = 7000, s_x = 0, s_y = 10000, s_z = 1000
-            roof_skin(width = 8000, depth = 10, length = 4500, delta = 600, t_x = 1400, t_y = 3000, t_z = 1800, difference_sphere = 5000, s_x = 0, s_y = 7000, s_z = 1100);
+            roof_skin(width = 8000, depth = 10, length = 4500, delta = 600, t_x = 1400, t_y = 3000, t_z = 1800, d_s_f = 5000, d_s_f_x = 0, d_s_f_y = 7000, d_s_f_z = 1100, d_s_f_d = false, d_s_r = 5000, d_s_r_x = 0, d_s_r_y = 3000, d_s_r_z = 1100, d_s_r_d = false);
     }
 }
 
